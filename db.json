@@ -1,0 +1,58 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "user": "admin",
+      "password": 1234,
+      "is_admin": true
+    },
+    {
+      "id": 2,
+      "user": "user",
+      "password": 1234,
+      "is_admin": false
+    }
+  ],
+  "activities": [
+    {
+      "id": 1,
+      "id_user": 2,
+      "type": "pompe",
+      "intensity": "faible",
+      "time": 30,
+      "date": "2020-07-03"
+    },
+    {
+      "user_id": null,
+      "type": "Pompes",
+      "intensity": "Faible",
+      "time": "4",
+      "date": "2020-07-03",
+      "id": 2
+    },
+    {
+      "user_id": null,
+      "type": "Pompes",
+      "intensity": "Moyenne",
+      "time": "8",
+      "date": "2020-07-03T13:33:30.940Z",
+      "id": 3
+    },
+    {
+      "user_id": null,
+      "type": "Pompes",
+      "intensity": "Faible",
+      "time": "055",
+      "date": "2020-07-03T14:48:05.509Z",
+      "id": 4
+    },
+    {
+      "user_id": null,
+      "type": "Pompes",
+      "intensity": "Faible",
+      "time": "052",
+      "date": "2020-07-03T17:46:45.980Z",
+      "id": 5
+    }
+  ]
+}

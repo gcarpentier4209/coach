@@ -1,60 +1,56 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+    <v-app>
+        <v-app-bar app color="primary darken-1" dark>
+            <v-toolbar-title>
+                <v-btn to="/" text>
+                    <v-icon large>mdi-weight-lifter</v-icon>
+                    <h1>Coach</h1>
+                </v-btn>
+            </v-toolbar-title>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+            <v-btn v-if="!this.$store.state.user" to="/today" text>Aujoud'hui</v-btn>
 
-      <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+            <v-btn to="/about" text class="mx-2">A propos</v-btn>
 
-    <v-content>
-      <HelloWorld/>
-    </v-content>
-  </v-app>
+            <v-btn to="/login" class="secondary"><span class="mr-2">Connexion</span></v-btn>
+        </v-app-bar>
+
+        <v-main class="grey lighten-5">
+                <router-view></router-view>
+        </v-main>
+    </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 
-export default {
-  name: 'App',
+    export default {
+        name: 'App',
 
-  components: {
-    HelloWorld,
-  },
+        components: {},
 
-  data: () => ({
-    //
-  }),
-};
+        data: () => ({
+            //
+        }),
+        created(){
+            const activitiesInStore = this.$store.state.activities.activities;
+            this.getMyActivitiesFromDB().then((value)=> activitiesInStore.push(value));
+            this.$store.dispatch("updateActivities", activitiesInStore);
+
+        },
+        methods: {
+            async getMyActivitiesFromDB() {
+                const url = "http://localhost:3000/activities";
+                const activitiesInDB= await this.axios.get(url);
+                return activitiesInDB.data;
+
+            }
+        },
+    };
 </script>
+<style lang="scss">
+    a {
+        text-decoration: none;
+    }
+</style>
